@@ -45,10 +45,17 @@ func calculate(operand1 int, operator string, operand2 int) int {
 	case "+":
 		return operand1 + operand2
 	case "-":
-		return operand1 - operand2
+		result := operand1 - operand2
+		if result <= 0 {
+			panic("Отрицательный или нулевой результат для римских чисел")
+		}
+		return result
 	case "*":
 		return operand1 * operand2
 	case "/":
+		if operand1%operand2 != 0 {
+			panic("Деление римских чисел должно быть без остатка")
+		}
 		return operand1 / operand2
 	default:
 		panic("Неправильная арифметическая операция")
@@ -71,14 +78,29 @@ func main() {
 	operator := parts[1]
 	operand2Str := parts[2]
 
+	var isRomanInput bool
+	var isArabicInput bool
+
 	operand1, err := strconv.Atoi(operand1Str)
 	if err != nil {
+		isRomanInput = true
 		operand1 = romanToArabic(operand1Str)
+	} else {
+		isArabicInput = true
 	}
 
 	operand2, err := strconv.Atoi(operand2Str)
 	if err != nil {
-		operand2 = romanToArabic(operand2Str)
+		if isRomanInput {
+			operand2 = romanToArabic(operand2Str)
+		} else {
+			panic("Одновременный ввод римских и арабских чисел недопустим")
+		}
+	} else {
+		if isArabicInput {
+		} else {
+			panic("Одновременный ввод римских и арабских чисел недопустим")
+		}
 	}
 
 	if operand1 < 1 || operand1 > 10 || operand2 < 1 || operand2 > 10 {
@@ -87,10 +109,14 @@ func main() {
 
 	result := calculate(operand1, operator, operand2)
 
-	if operand1Str != "" {
-		fmt.Printf("Результат: %d\n", result)
-	} else {
+	if isRomanInput {
+		if result <= 0 {
+			panic("Отрицательный или нулевой результат для римских чисел")
+		}
+
 		fmt.Printf("Результат: %s\n", arabicToRoman(result))
+	} else {
+		fmt.Printf("Результат: %d\n", result)
 	}
 }
 
