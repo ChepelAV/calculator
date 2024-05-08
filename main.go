@@ -10,16 +10,26 @@ import (
 
 func romanToArabic(romanNum string) int {
 	romanMap := map[string]int{
-		"I":    1,
-		"II":   2,
-		"III":  3,
-		"IV":   4,
-		"V":    5,
-		"VI":   6,
-		"VII":  7,
-		"VIII": 8,
-		"IX":   9,
-		"X":    10,
+		"I":     1,
+		"II":    2,
+		"III":   3,
+		"IV":    4,
+		"V":     5,
+		"VI":    6,
+		"VII":   7,
+		"VIII":  8,
+		"IX":    9,
+		"X":     10,
+		"XI":    11,
+		"XII":   12,
+		"XIII":  13,
+		"XIV":   14,
+		"XV":    15,
+		"XVI":   16,
+		"XVII":  17,
+		"XVIII": 18,
+		"XIX":   19,
+		"XX":    20,
 	}
 	return romanMap[romanNum]
 }
@@ -36,6 +46,16 @@ func arabicToRoman(arabicNum int) string {
 		8:  "VIII",
 		9:  "IX",
 		10: "X",
+		11: "XI",
+		12: "XII",
+		13: "XIII",
+		14: "XIV",
+		15: "XV",
+		16: "XVI",
+		17: "XVII",
+		18: "XVIII",
+		19: "XIX",
+		20: "XX",
 	}
 	return romanMap[arabicNum]
 }
